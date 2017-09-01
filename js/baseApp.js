@@ -17,8 +17,6 @@ class BaseApp {
         this.mouse = new THREE.Vector2();
         this.pickedObjects = [];
         this.selectedObject = null;
-        this.draggableObjects = [];
-        this.draggedObject = null;
         this.hoverObjects = [];
         this.startTime = 0;
         this.elapsedTime = 0;
@@ -33,33 +31,34 @@ class BaseApp {
         this.createRenderer();
         this.createCamera();
         this.createControls();
-        this.stats = this.initStats();
+        //this.stats = initStats();
         this.statsShowing = false;
-        this.statsShowing ? $("#Stats-output").show() : $('#Stats-output').hide();
+        //$("#Stats-output").hide();
     }
 
     createRenderer() {
-        this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
-        this.renderer.setClearColor(0x5c5f64, 1.0);
-        this.renderer.shadowMapEnabled = true;
-        let isMSIE = /*@cc_on!@*/0;
+        this.renderer = new THREE.WebGLRenderer( {antialias : true, alpha: true});
+        this.renderer.setClearColor(0x7d818c, 1.0);
+        this.renderer.shadowMap.enabled = true;
 
-        let width = this.container.clientWidth;
-        if (isMSIE) {
-            // do IE-specific things
-            width = window.innerWidth;
-        }
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.container.appendChild(this.renderer.domElement);
+        this.container.appendChild( this.renderer.domElement );
+
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFShadowMap;
+
+        window.addEventListener('keydown', event => {
+            this.keyDown(event);
+        }, false);
 
         window.addEventListener('resize', event => {
             this.windowResize(event);
         }, false);
     }
 
-    keydown(event) {
+    keyDown(event) {
         //Key press functionality
-        switch (event.keyCode) {
+        switch(event.keyCode) {
             case 83: //'S'
                 if (this.stats) {
                     if (this.statsShowing) {
@@ -82,7 +81,7 @@ class BaseApp {
         event.preventDefault();
         this.pickedObjects.length = 0;
 
-        if (event.type == 'mouseup') {
+        if(event.type == 'mouseup') {
             this.mouse.endX = event.clientX;
             this.mouse.endY = event.clientY;
             this.mouse.down = false;
@@ -93,8 +92,8 @@ class BaseApp {
             -(event.clientY / window.innerHeight) * 2 + 1);
         this.mouse.down = true;
         this.raycaster.setFromCamera(this.mouse, this.camera);
-        let intersects = this.raycaster.intersectObjects(this.scenes[this.currentScene].children, true);
-        if (intersects.length > 0) {
+        let intersects = this.raycaster.intersectObjects( this.scenes[this.currentScene].children, true );
+        if(intersects.length > 0) {
             this.selectedObject = intersects[0].object;
             //DEBUG
             console.log("Picked = ", this.selectedObject);
@@ -112,8 +111,7 @@ class BaseApp {
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
 
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        //console.log('Size =', )
+        this.renderer.setSize( window.innerWidth, window.innerHeight);
     }
 
     createScene() {
@@ -123,46 +121,35 @@ class BaseApp {
         let ambientLight = new THREE.AmbientLight(0x383838);
         scene.add(ambientLight);
 
-        /*
-         var spotLight = new THREE.SpotLight(0xffffff);
-         spotLight.position.set(100, 100, 200);
-         spotLight.intensity = 1;
-         this.scene.add(spotLight);
-         */
+         let directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0 );
+         directionalLight.position.set( 100, 100, 100 );
+         directionalLight.name = "sunlight";
+         scene.add( directionalLight );
 
-        /*
-         var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0 );
-         directionalLight.position.set( 1, 1, 1 );
-         this.scene.add( directionalLight );
-         */
-
-
+         /*
         let pointLight = new THREE.PointLight(0xffffff);
-        pointLight.position.set(0, 100, 100);
+        pointLight.position.set(0,100,100);
         pointLight.name = 'PointLight';
         scene.add(pointLight);
+        */
 
-        return this.scenes.length - 1;
+        return this.scenes.length-1;
     }
 
-    addDraggableObject(object) {
-        this.draggableObjects.push(object);
+    addToScene(object) {
+        this.scenes[this.currentScene].add(object);
     }
 
-    setDraggedObject(object) {
-        this.draggedObject = object;
-    }
-
-    clearDraggedObject() {
-        this.draggedObject = null;
+    getObjectByName(name) {
+        return this.scenes[this.currentScene].getObjectByName(name);
     }
 
     createCamera() {
-        this.defaultCamPos = new THREE.Vector3(0, 0, 100);
-        this.camera = new THREE.PerspectiveCamera(45, this.container.clientWidth / window.innerHeight, 0.1, 5000);
+        const CAM_X = 0, CAM_Y = 50, CAM_Z = 20;
+        const NEAR_PLANE = 0.1, FAR_PLANE = 10000;
+        this.defaultCamPos = new THREE.Vector3(CAM_X, CAM_Y, CAM_Z);
+        this.camera = new THREE.PerspectiveCamera(45, this.container.clientWidth / window.innerHeight, NEAR_PLANE, FAR_PLANE );
         this.camera.position.copy(this.defaultCamPos);
-
-        console.log('dom =', this.renderer.domElement);
     }
 
     createControls() {
@@ -174,9 +161,10 @@ class BaseApp {
         this.controls.staticMoving = true;
         this.controls.dynamicDampingFactor = 0.3;
 
-        this.controls.keys = [65, 83, 68];
+        this.controls.keys = [ 65, 83, 68 ];
 
-        let lookAt = new THREE.Vector3(0, 0, 0);
+        const LOOK_X = 0, LOOK_Y = 50, LOOK_Z = 0;
+        let lookAt = new THREE.Vector3(LOOK_X, LOOK_Y, LOOK_Z);
         this.controls.setLookAt(lookAt);
     }
 
@@ -191,9 +179,9 @@ class BaseApp {
     }
 
     run() {
-        this.renderer.render(this.scenes[this.currentScene], this.camera);
+        this.renderer.render( this.scenes[this.currentScene], this.camera );
         this.update();
-        if (this.stats) this.stats.update();
+        if(this.stats) this.stats.update();
         requestAnimationFrame(() => {
             this.run();
         });
@@ -209,7 +197,7 @@ class BaseApp {
         stats.domElement.style.left = '0px';
         stats.domElement.style.top = '0px';
 
-        $("#Stats-output").append(stats.domElement);
+        $("#Stats-output").append( stats.domElement );
 
         return stats;
     }

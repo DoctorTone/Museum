@@ -17,11 +17,18 @@ class MuseumApp extends BaseApp {
         //Create scene
         super.createScene();
 
-        //Simple geometry
-        let boxGeom = new THREE.BoxBufferGeometry(10, 10, 10);
-        let boxMat = new THREE.MeshLambertMaterial( {color: 0xff0000} );
-        let boxMesh = new THREE.Mesh(boxGeom, boxMat);
-        this.scenes[this.currentScene].add(boxMesh);
+        //Load in model
+        let loader = new THREE.JSONLoader();
+        let modelConfig = {
+            SCALE_X : 30,
+            SCALE_Y : 30,
+            SCALE_Z : 30
+        };
+        loader.load("./models/Barbute.json", (geometry, materials) => {
+            let mesh = new THREE.Mesh(geometry, new THREE.MultiMaterial(materials));
+            mesh.scale.set(modelConfig.SCALE_X, modelConfig.SCALE_Y, modelConfig.SCALE_Z);
+            this.addToScene(mesh);
+        });
     }
 
     update() {
