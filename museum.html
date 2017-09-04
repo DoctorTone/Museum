@@ -4,11 +4,13 @@
 
 <head lang="en">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>Museum</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link href="css/museumStyles.css?v=0.2" rel="stylesheet" type="text/css">
+    <link href="css/museumStyles.css?v=0.3" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="js/three86.js"></script>
     <script type="text/javascript" src="js/stats.js"></script>
@@ -16,7 +18,7 @@
     <script type="text/javascript" src="js/TrackballControls.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/detector.js"></script>
-    <script type="text/javascript" src="js/baseApp.js?v=0.4"></script>
+    <script type="text/javascript" src="js/baseApp.js?v=0.7"></script>
     <script type="text/javascript" src="js/MTLLoader.js"></script>
     <script type="text/javascript" src="js/OBJLoader.js"></script>
     <script type="text/javascript" src="js/controlKit.min.js?v=0.1"></script>
@@ -32,5 +34,28 @@
     <div id="WebGL-output">
     </div>
 
+    <div id="settings" class="infoPanel">
+        <div class="checkbox">
+            <label><input id="toggleRotation" type="checkbox" value="" checked>Rotate</label>
+        </div>
+        <div class="checkbox">
+            <label><input id="toggleWire" type="checkbox" value="">Wireframe</label>
+        </div>
+    </div>
+
+    <div id="moveControls" class="infoPanel centred">
+        <div>
+            <button id="rotUp" type="button" class="btn btn-primary">Up</button>
+        </div>
+        <div>
+            <button id="rotDown" type="button" class="btn btn-primary">Down</button>
+        </div>
+        <div>
+            <button id="zoomIn" type="button" class="btn btn-primary">Up</button>
+        </div>
+        <div>
+            <button id="rotDown" type="button" class="btn btn-primary">Down</button>
+        </div>
+    </div>
 </body>
 </html>

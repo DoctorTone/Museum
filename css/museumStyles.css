@@ -14,6 +14,10 @@ body {
 }
 .infoPanel {
     position: absolute;
+    background: gray;
+    border-radius: 15px;
+    border: 2px solid black;
+    padding: 1%;
 }
 #notSupported {
     background: #a9434a;
@@ -25,4 +29,12 @@ body {
     top: 25%;
     left: 33.333%;
     width: 33.333%;
+}
+#settings {
+    top: 1%;
+    right: 1%;
+}
+#moveControls {
+    top: 15%;
+    right: 1%;
 }
