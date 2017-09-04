@@ -14,8 +14,11 @@ class MuseumApp extends BaseApp {
         this.rotating = false;
         this.wireframe = false;
         this.rotateSpeed = 0.15*Math.PI;
+        this.moveSpeed = 0.1;
         this.rotatingUp = false;
         this.rotatingDown = false;
+        this.zoomingIn = false;
+        this.zoomingOut = false;
     }
 
     createScene() {
@@ -68,6 +71,14 @@ class MuseumApp extends BaseApp {
             this.rotateMesh.rotation.x += this.rotateSpeed * delta;
         }
 
+        if(this.zoomingIn) {
+            this.rotateObject.position.z += this.moveSpeed * delta;
+        }
+
+        if(this.zoomingOut) {
+            this.rotateObject.position.z -= this.moveSpeed * delta;
+        }
+
         super.update();
     }
 
@@ -92,6 +103,14 @@ class MuseumApp extends BaseApp {
 
     rotateDown(rotate) {
         this.rotatingDown = rotate;
+    }
+
+    zoomIn(zoom) {
+        this.zoomingIn = zoom;
+    }
+
+    zoomOut(zoom) {
+        this.zoomingOut = zoom;
     }
 }
 
@@ -126,6 +145,22 @@ $(document).ready( ()=> {
 
     $('#rotDown').on("mouseup", () => {
         app.rotateDown(false);
+    });
+
+    $('#zoomIn').on("mousedown", () => {
+        app.zoomIn(true);
+    });
+
+    $('#zoomIn').on("mouseup", () => {
+        app.zoomIn(false);
+    });
+
+    $('#zoomOut').on("mousedown", () => {
+        app.zoomOut(true);
+    });
+
+    $('#zoomOut').on("mouseup", () => {
+        app.zoomOut(false);
     });
 
     app.run();
