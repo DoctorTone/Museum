@@ -24,11 +24,20 @@ class MuseumApp extends BaseApp {
             SCALE_Y : 30,
             SCALE_Z : 30
         };
-        loader.load("./models/Barbute.json", (geometry, materials) => {
-            let mesh = new THREE.Mesh(geometry, new THREE.MultiMaterial(materials));
-            mesh.scale.set(modelConfig.SCALE_X, modelConfig.SCALE_Y, modelConfig.SCALE_Z);
-            this.addToScene(mesh);
-        });
+        let mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setPath("./models/");
+        mtlLoader.load("Barbute1.mtl", materials => {
+            materials.preload();
+
+            let objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.setPath("./models/");
+            objLoader.load("Barbute1.obj", object => {
+                object.scale.set(modelConfig.SCALE_X, modelConfig.SCALE_Y, modelConfig.SCALE_Z);
+                object.rotation.y = Math.PI/4;
+                this.addToScene(object);
+            })
+        })
     }
 
     update() {
