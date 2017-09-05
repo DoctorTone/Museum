@@ -54,26 +54,63 @@ class MuseumApp extends BaseApp {
     }
 
     createInfoPoints() {
+        let infoPoints = [
+            {
+                text : ["15th century Italian design.", "Typically made of steel."],
+                POS_X : -0.085,
+                POS_Y : 0.1,
+                POS_Z : 0.05,
+                LABEL_OFFSET_X : -0.06,
+                LABEL_OFFSET_Y : 0.04
+            },
+            {
+                text : ["Distinctive T-shaped opening for eyes and mouth.", "Weighed between 3 and 4 pounds"],
+                POS_X : 0,
+                POS_Y : 0.04,
+                POS_Z : 0.135,
+                LABEL_OFFSET_X : 0,
+                LABEL_OFFSET_Y : 0.05
+            },
+            {
+                text : ["Extension covering both sides of user's face.", "Allows wearing of stiffened mail collar."],
+                POS_X : 0.11,
+                POS_Y : -0.1,
+                POS_Z : 0,
+                LABEL_OFFSET_X : 0.05,
+                LABEL_OFFSET_Y : 0.05
+            }
+        ];
         let infoConfig = {
             INFO_SCALE_X : 0.00025,
             INFO_SCALE_Y : 0.00025,
             INFO_SCALE_Z : 1
         };
-        let infoPositions = [];
-        infoPositions.push(new THREE.Vector3(-0.085, 0.1, 0.05));
-        infoPositions.push(new THREE.Vector3(0, 0.04, 0.135));
-        infoPositions.push(new THREE.Vector3(0.11, -0.1, -0.0));
+        let labelConfig = {
+            signLabelScaleX: 0.125,
+            signLabelScaleY: 0.045
+        };
+
+        let infoPosition, labelOffset = new THREE.Vector3();
         let textureLoader = new THREE.TextureLoader();
         textureLoader.load("textures/infoBlueWhite.png", texture => {
             let infoMaterial = new THREE.SpriteMaterial( {map: texture, color: 0xffffff} );
             let width = infoMaterial.map.image.width;
             let height = infoMaterial.map.image.height;
-            let infoSprite;
-            for(let i=0, numPoints=infoPositions.length; i<numPoints; ++i) {
+            let info, infoSprite, label;
+            let labelScale = new THREE.Vector3(labelConfig.signLabelScaleX, labelConfig.signLabelScaleY, 1);
+            for(let i=0, numPoints=infoPoints.length; i<numPoints; ++i) {
                 infoSprite = new THREE.Sprite(infoMaterial);
-                infoSprite.position.copy(infoPositions[i]);
+                info = infoPoints[i];
+                infoPosition = new THREE.Vector3(info.POS_X, info.POS_Y, info.POS_Z);
+                infoSprite.position.copy(infoPosition);
                 infoSprite.scale.set(width * infoConfig.INFO_SCALE_X, height * infoConfig.INFO_SCALE_Y, 1);
                 this.rotateObject.add(infoSprite);
+                //Create text as well
+                labelOffset.copy(infoPosition);
+                labelOffset.x += info.LABEL_OFFSET_X;
+                labelOffset.y += info.LABEL_OFFSET_Y;
+                label = spriteManager.create(info.text, labelOffset, labelScale, 32, 1, true, true);
+                this.rotateObject.add(label);
             }
         });
     }
