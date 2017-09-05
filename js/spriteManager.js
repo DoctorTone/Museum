@@ -178,6 +178,12 @@ let spriteManager = (function () {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillText(amount, defaultBorderThickness + offset, currentFontSize + defaultBorderThickness);
             labels[i].material.map.needsUpdate = true;
+        },
+
+        hideLabels: function() {
+            for(let i=0; i<labels.length; ++i) {
+                labels[i].visible = false;
+            }
         }
     };
 })();

@@ -12,6 +12,10 @@ body {
 .centred {
     text-align: center;
 }
+.plainPanel {
+    position: absolute;
+    color: orange;
+}
 .infoPanel {
     position: absolute;
     background: gray;
@@ -29,6 +33,11 @@ body {
     top: 25%;
     left: 33.333%;
     width: 33.333%;
+}
+#title {
+    left: 42.5%;
+    top: 1%;
+    width: 15%;
 }
 #settings {
     top: 1%;

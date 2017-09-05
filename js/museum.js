@@ -13,12 +13,14 @@ class MuseumApp extends BaseApp {
         super.init(container);
         this.rotating = false;
         this.wireframe = false;
+        this.rotateObject = undefined;
         this.rotateSpeed = 0.05*Math.PI;
         this.moveSpeed = 0.1;
         this.rotatingUp = false;
         this.rotatingDown = false;
         this.zoomingIn = false;
         this.zoomingOut = false;
+        this.labelsVisible = false;
     }
 
     createScene() {
@@ -56,7 +58,7 @@ class MuseumApp extends BaseApp {
     createInfoPoints() {
         let infoPoints = [
             {
-                text : ["15th century Italian design.", "Typically made of steel."],
+                text : ["15th century Italian design.", "  Typically made of steel."],
                 POS_X : -0.085,
                 POS_Y : 0.1,
                 POS_Z : 0.05,
@@ -64,7 +66,7 @@ class MuseumApp extends BaseApp {
                 LABEL_OFFSET_Y : 0.04
             },
             {
-                text : ["Distinctive T-shaped opening for eyes and mouth.", "Weighed between 3 and 4 pounds"],
+                text : ["Distinctive T-shaped opening for eyes and mouth.", "       Weighed between 3 and 4 pounds"],
                 POS_X : 0,
                 POS_Y : 0.04,
                 POS_Z : 0.135,
@@ -72,7 +74,7 @@ class MuseumApp extends BaseApp {
                 LABEL_OFFSET_Y : 0.05
             },
             {
-                text : ["Extension covering both sides of user's face.", "Allows wearing of stiffened mail collar."],
+                text : ["Extension covering both sides of user's face.", "  Allows wearing of stiffened mail collar."],
                 POS_X : 0.11,
                 POS_Y : -0.1,
                 POS_Z : 0,
@@ -100,6 +102,7 @@ class MuseumApp extends BaseApp {
             let labelScale = new THREE.Vector3(labelConfig.signLabelScaleX, labelConfig.signLabelScaleY, 1);
             for(let i=0, numPoints=infoPoints.length; i<numPoints; ++i) {
                 infoSprite = new THREE.Sprite(infoMaterial);
+                infoSprite.name = "infoSprite" + i;
                 info = infoPoints[i];
                 infoPosition = new THREE.Vector3(info.POS_X, info.POS_Y, info.POS_Z);
                 infoSprite.position.copy(infoPosition);
@@ -109,10 +112,18 @@ class MuseumApp extends BaseApp {
                 labelOffset.copy(infoPosition);
                 labelOffset.x += info.LABEL_OFFSET_X;
                 labelOffset.y += info.LABEL_OFFSET_Y;
-                label = spriteManager.create(info.text, labelOffset, labelScale, 32, 1, true, true);
+                label = spriteManager.create(info.text, labelOffset, labelScale, 32, 1, false, true);
                 this.rotateObject.add(label);
             }
         });
+    }
+
+    hideLabels() {
+        spriteManager.hideLabels();
+        this.labelsVisible = false;
+        if(this.rotateObject) {
+            this.rotating = true;
+        }
     }
 
     createGUI() {
@@ -140,6 +151,34 @@ class MuseumApp extends BaseApp {
 
         if(this.zoomingOut) {
             this.rotateObject.position.z -= this.moveSpeed * delta;
+        }
+
+        if(this.mouseUpdated) {
+            this.mouseUpdated = false;
+            this.labelsVisible = false;
+            this.selectedName = undefined;
+            if(this.selectedObject) {
+                let name = this.selectedObject.name;
+                if(name.indexOf("infoSprite") >= 0) {
+                    console.log("Clicked ", name);
+                    this.labelsVisible = true;
+                    this.selectedName = name;
+                }
+                this.selectedObject = undefined;
+            }
+
+            if(this.labelsVisible) {
+                let infoNum = this.selectedName.match(/\d/g);
+                infoNum = infoNum.join("");
+                infoNum = parseInt(infoNum, 10);
+                let label = spriteManager.getSpriteByIndex(infoNum);
+                if(label) {
+                    label.visible = true;
+                    this.rotating = false;
+                }
+            } else {
+                this.hideLabels();
+            }
         }
 
         super.update();

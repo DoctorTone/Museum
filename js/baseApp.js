@@ -54,6 +54,10 @@ class BaseApp {
         window.addEventListener('resize', event => {
             this.windowResize(event);
         }, false);
+
+        this.container.addEventListener('mousedown', event => {
+            this.mouseClicked(event);
+        }, false);
     }
 
     keyDown(event) {
@@ -78,25 +82,20 @@ class BaseApp {
 
     mouseClicked(event) {
         //Update mouse state
+        this.mouseUpdated = true;
         event.preventDefault();
         this.pickedObjects.length = 0;
 
-        if(event.type == 'mouseup') {
-            this.mouse.endX = event.clientX;
-            this.mouse.endY = event.clientY;
-            this.mouse.down = false;
-            this.objectsPicked = false;
-            return;
-        }
-        this.mouse.set((event.clientX / window.innerWidth) * 2 - 1,
-            -(event.clientY / window.innerHeight) * 2 + 1);
-        this.mouse.down = true;
+        this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
         this.raycaster.setFromCamera(this.mouse, this.camera);
         let intersects = this.raycaster.intersectObjects( this.scenes[this.currentScene].children, true );
+        this.selectedObject = undefined;
         if(intersects.length > 0) {
             this.selectedObject = intersects[0].object;
             //DEBUG
-            console.log("Picked = ", this.selectedObject);
+            //console.log("Picked = ", this.selectedObject.name);
         }
     }
 
