@@ -13,7 +13,7 @@ class MuseumApp extends BaseApp {
         super.init(container);
         this.rotating = false;
         this.wireframe = false;
-        this.rotateSpeed = 0.15*Math.PI;
+        this.rotateSpeed = 0.05*Math.PI;
         this.moveSpeed = 0.1;
         this.rotatingUp = false;
         this.rotatingDown = false;
@@ -46,7 +46,7 @@ class MuseumApp extends BaseApp {
                 this.addToScene(object);
                 this.rotateObject = object;
                 this.rotateMesh = this.rotateObject.children[0];
-                this.rotateMesh.position.set(modelConfig.POS_X, modelConfig.POS_Y, modelConfig.POS_Z);
+                this.rotateObject.position.set(modelConfig.POS_X, modelConfig.POS_Y, modelConfig.POS_Z);
                 this.rotating = true;
             })
         })
@@ -64,11 +64,11 @@ class MuseumApp extends BaseApp {
         }
 
         if(this.rotatingUp) {
-            this.rotateMesh.rotation.x -= this.rotateSpeed * delta;
+            this.rotateObject.rotation.x -= this.rotateSpeed * delta;
         }
 
         if(this.rotatingDown) {
-            this.rotateMesh.rotation.x += this.rotateSpeed * delta;
+            this.rotateObject.rotation.x += this.rotateSpeed * delta;
         }
 
         if(this.zoomingIn) {
@@ -111,6 +111,17 @@ class MuseumApp extends BaseApp {
 
     zoomOut(zoom) {
         this.zoomingOut = zoom;
+    }
+
+    reset() {
+        //Return object to default orientation
+        this.rotateObject.position.set(0, 0, 0);
+        this.rotateObject.rotation.set(0, 0, 0);
+        this.wireframe = true;
+        this.toggleWireframe();
+        this.rotating = true;
+        $('#toggleRotation').prop("checked", true);
+        $('#toggleWire').prop("checked", false);
     }
 }
 
@@ -161,6 +172,10 @@ $(document).ready( ()=> {
 
     $('#zoomOut').on("mouseup", () => {
         app.zoomOut(false);
+    });
+
+    $('#reset').on("click", () => {
+        app.reset();
     });
 
     app.run();
