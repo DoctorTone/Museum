@@ -48,8 +48,34 @@ class MuseumApp extends BaseApp {
                 this.rotateMesh = this.rotateObject.children[0];
                 this.rotateObject.position.set(modelConfig.POS_X, modelConfig.POS_Y, modelConfig.POS_Z);
                 this.rotating = true;
+                this.createInfoPoints();
             })
-        })
+        });
+    }
+
+    createInfoPoints() {
+        let infoConfig = {
+            INFO_SCALE_X : 0.00025,
+            INFO_SCALE_Y : 0.00025,
+            INFO_SCALE_Z : 1
+        };
+        let infoPositions = [];
+        infoPositions.push(new THREE.Vector3(-0.085, 0.1, 0.05));
+        infoPositions.push(new THREE.Vector3(0, 0.04, 0.135));
+        infoPositions.push(new THREE.Vector3(0.11, -0.1, -0.0));
+        let textureLoader = new THREE.TextureLoader();
+        textureLoader.load("textures/infoBlueWhite.png", texture => {
+            let infoMaterial = new THREE.SpriteMaterial( {map: texture, color: 0xffffff} );
+            let width = infoMaterial.map.image.width;
+            let height = infoMaterial.map.image.height;
+            let infoSprite;
+            for(let i=0, numPoints=infoPositions.length; i<numPoints; ++i) {
+                infoSprite = new THREE.Sprite(infoMaterial);
+                infoSprite.position.copy(infoPositions[i]);
+                infoSprite.scale.set(width * infoConfig.INFO_SCALE_X, height * infoConfig.INFO_SCALE_Y, 1);
+                this.rotateObject.add(infoSprite);
+            }
+        });
     }
 
     createGUI() {
