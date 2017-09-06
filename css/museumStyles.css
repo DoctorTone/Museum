@@ -16,9 +16,12 @@ body {
     position: absolute;
     color: orange;
 }
-.label {
-    border: 2px solid black;
-    background: #585858;
+@font-face {
+    font-family: 'maelregular';
+    src: url('../fonts/mael-webfont.woff2') format('woff2'),
+    url('../fonts/mael-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 .infoPanel {
     position: absolute;
@@ -40,8 +43,10 @@ body {
 }
 #title {
     left: 42.5%;
-    top: 1%;
+    top: 2%;
     width: 15%;
+    font-family: "maelregular";
+    font-size: 4vw;
 }
 #settings {
     top: 1%;
