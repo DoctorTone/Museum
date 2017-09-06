@@ -180,8 +180,10 @@ class MuseumApp extends BaseApp {
                     label.visible = true;
                     this.rotating = false;
                 }
+                $('#noticeText').html("Click anywhere to continue");
             } else {
                 this.hideLabels();
+                $('#noticeText').html("Click info icons!");
             }
         }
 
@@ -283,6 +285,8 @@ $(document).ready( ()=> {
     $('#reset').on("click", () => {
         app.reset();
     });
+
+    $('#noticeText').html("Click info icons!");
 
     app.run();
 });
