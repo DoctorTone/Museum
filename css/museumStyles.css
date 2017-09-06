@@ -16,6 +16,9 @@ body {
     position: absolute;
     color: orange;
 }
+.btn {
+    padding: 3% 0;
+}
 @font-face {
     font-family: 'maelregular';
     src: url('../fonts/mael-webfont.woff2') format('woff2'),
@@ -65,4 +68,11 @@ body {
 #moveControls p {
     color: white;
     font-size: 1.1vw;
+}
+#moveControls img {
+    width: 40%;
+}
+#moveControls button {
+    width: 75%;
+    margin-bottom: 3%;
 }
