@@ -63,23 +63,26 @@ class MuseumApp extends BaseApp {
                 POS_Y : 0.1,
                 POS_Z : 0.05,
                 LABEL_OFFSET_X : -0.06,
-                LABEL_OFFSET_Y : 0.04
+                LABEL_OFFSET_Y : 0.02,
+                LABEL_OFFSET_Z : 0.01
             },
             {
-                text : ["Distinctive T-shaped opening for eyes and mouth.", "       Weighed between 3 and 4 pounds"],
+                text : ["T-shaped opening for eyes and mouth.", "    Weighed between 3 and 4 pounds"],
                 POS_X : 0,
                 POS_Y : 0.04,
                 POS_Z : 0.135,
                 LABEL_OFFSET_X : 0,
-                LABEL_OFFSET_Y : 0.05
+                LABEL_OFFSET_Y : 0.025,
+                LABEL_OFFSET_Z : 0.01
             },
             {
-                text : ["Extension covering both sides of user's face.", "  Allows wearing of stiffened mail collar."],
+                text : ["Covered both sides of user's face and neck.", "  Allows wearing of stiffened mail collar."],
                 POS_X : 0.11,
                 POS_Y : -0.1,
                 POS_Z : 0,
                 LABEL_OFFSET_X : 0.05,
-                LABEL_OFFSET_Y : 0.05
+                LABEL_OFFSET_Y : 0.03,
+                LABEL_OFFSET_Z : 0.01
             }
         ];
         let infoConfig = {
@@ -88,7 +91,7 @@ class MuseumApp extends BaseApp {
             INFO_SCALE_Z : 1
         };
         let labelConfig = {
-            signLabelScaleX: 0.125,
+            signLabelScaleX: 0.135,
             signLabelScaleY: 0.045
         };
 
@@ -112,6 +115,7 @@ class MuseumApp extends BaseApp {
                 labelOffset.copy(infoPosition);
                 labelOffset.x += info.LABEL_OFFSET_X;
                 labelOffset.y += info.LABEL_OFFSET_Y;
+                labelOffset.z += info.LABEL_OFFSET_Z;
                 label = spriteManager.create(info.text, labelOffset, labelScale, 32, 1, false, true);
                 this.rotateObject.add(label);
             }

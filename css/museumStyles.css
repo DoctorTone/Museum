@@ -16,6 +16,10 @@ body {
     position: absolute;
     color: orange;
 }
+.label {
+    border: 2px solid black;
+    background: #585858;
+}
 .infoPanel {
     position: absolute;
     background: gray;

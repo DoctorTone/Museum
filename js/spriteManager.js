@@ -7,7 +7,7 @@ let spriteManager = (function () {
     //Default values
     let defaultFontFace = "Arial";
     let defaultBorderThickness = 2;
-    let backgroundColour = 'rgba(55, 55, 55, 1.0)';
+    let backgroundColour = 'rgba(95, 95, 95, 0.5)';
     let borderColour = 'rgba(0, 0, 0, 1.0)';
     let textColour = 'rgba(255, 255, 255, 1.0)';
     let defaultFontSize = 24;
@@ -25,28 +25,33 @@ let spriteManager = (function () {
             //Create label
             let canvas = document.createElement('canvas');
             let numLines = textLines.length;
-            let spacing = 5;
-            canvas.height = (fontSize * numLines) + spacing + (defaultBorderThickness * 2);
+            let horizSpacing = 20, vertSpacing = 5;
+            canvas.height = (fontSize * numLines) + vertSpacing + (defaultBorderThickness * 2);
 
             let context = canvas.getContext('2d');
             context.font = fontSize + "px " + defaultFontFace;
 
             let metrics = context.measureText( textLines[0] );
             let textWidth = metrics.width;
-            canvas.width = textWidth + (defaultBorderThickness * 2) + spacing;
+            canvas.width = textWidth + (defaultBorderThickness * 2) + horizSpacing;
 
-            //Background
-            context.fillStyle = backgroundColour;
             //Border
-            context.strokeStyle = borderColour;
             context.lineWidth = defaultBorderThickness;
             context.fillStyle = textColour;
             context.font = fontSize + "px " + defaultFontFace;
 
             //Text
+            let width = canvas.width;
+            let height = canvas.height;
+            let radius = defaultRadius;
+            let border = defaultBorderThickness;
+            if(rect) {
+                roundRect(context, 0, 0, width, height, radius, border, backgroundColour);
+            }
             let xStart = (canvas.width - textWidth)/2;
-            let lineSpacing = fontSize + defaultBorderThickness + (spacing/2);
+            let lineSpacing = fontSize + defaultBorderThickness + (vertSpacing/2);
             let interLineSpace = 2;
+            context.fillStyle = textColour;
             for(let i=0; i<numLines; ++i) {
                 context.fillText(textLines[i], xStart, fontSize * (i+1));
                 lineSpacing += (fontSize + interLineSpace);
@@ -189,19 +194,22 @@ let spriteManager = (function () {
 })();
 
 // function for drawing rounded rectangles
-function roundRect(ctx, xStart, yStart, width, height, radius)
+function roundRect(ctx, xStart, yStart, width, height, radius, lineWidth, fillColour)
 {
+    let halfWidth = lineWidth/2;
+    ctx.lineWidth = lineWidth;
     ctx.beginPath();
-    ctx.moveTo(xStart + radius, yStart);
-    ctx.lineTo(xStart + width - radius, yStart);
-    ctx.quadraticCurveTo(xStart + width, yStart, xStart + width, yStart + radius);
-    ctx.lineTo(xStart + width, yStart + height - radius);
-    ctx.quadraticCurveTo(xStart + width, yStart + height, xStart + width - radius, yStart + height);
-    ctx.lineTo(xStart +radius, yStart + height);
-    ctx.quadraticCurveTo(xStart, yStart + height, xStart, yStart + height - radius);
-    ctx.lineTo(xStart, yStart + radius);
-    ctx.quadraticCurveTo(xStart, yStart, xStart + radius, yStart);
-    ctx.closePath();
-    ctx.fill();
+    ctx.moveTo(xStart + radius + halfWidth, yStart + halfWidth);
+    ctx.lineTo(xStart + width - radius - halfWidth, yStart + halfWidth);
+    ctx.arc(xStart + width - radius - halfWidth, radius + halfWidth, radius, -Math.PI/2, 0);
+    ctx.lineTo(xStart + width - halfWidth, height - radius - halfWidth);
+    ctx.arc(width - radius - halfWidth, height - radius - halfWidth, radius, 0, Math.PI/2);
+    ctx.lineTo(xStart + radius + halfWidth, height - halfWidth);
+    ctx.arc(xStart + radius + halfWidth, height - radius - halfWidth, radius, Math.PI/2, Math.PI);
+    ctx.lineTo(xStart + halfWidth, yStart + radius + halfWidth);
+    ctx.arc(xStart + radius + halfWidth, yStart + radius + halfWidth, radius, Math.PI, -Math.PI/2);
     ctx.stroke();
+    ctx.fillStyle = fillColour;
+    ctx.fill();
+    ctx.closePath();
 }
