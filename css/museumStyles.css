@@ -184,4 +184,28 @@ body {
     #instructions p {
         font-size: 4.5vw;
     }
+    #waiting {
+        width: 60%;
+        left: 20%;
+    }
+    #waiting p {
+        font-size: 3vw;
+    }
+}
+@media (min-width: 768px) {
+    #settings {
+        width: 15%;
+    }
+    #settings p {
+        font-size: 3vw;
+    }
+    .checkbox label {
+        font-size: 2vw;
+    }
+    #instructions p {
+        font-size: 2.5vw;
+    }
+    #info {
+        width: 7.5%;
+    }
 }
