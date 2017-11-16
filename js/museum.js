@@ -40,6 +40,7 @@ class MuseumApp extends BaseApp {
         let mtlLoader = new THREE.MTLLoader();
         mtlLoader.setPath("./models/");
         mtlLoader.load("Barbute.mtl", materials => {
+            $('#waiting').hide();
             materials.preload();
 
             let objLoader = new THREE.OBJLoader();
