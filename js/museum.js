@@ -235,6 +235,11 @@ class MuseumApp extends BaseApp {
 }
 
 $(document).ready( ()=> {
+    //Make sure we support WebGL
+    if ( !Detector.webgl ) {
+        $('#notSupported').show();
+        return;
+    }
 
     if(window.innerWidth < MOBILE_WIDTH) {
         $('#mainModal').modal();
