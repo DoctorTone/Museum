@@ -38,6 +38,9 @@ body {
     border: 2px solid black;
     padding: 1%;
 }
+.infoPanelClear {
+    position: absolute;
+}
 #notSupported {
     background: #a9434a;
     border-radius: 15px;
@@ -90,4 +93,21 @@ body {
     left: 40%;
     width: 20%;
     font-size: 1.5vw;
+}
+#info {
+    bottom: 1%;
+    left: 1%;
+    width: 5%;
+}
+#info img {
+    width: 100%;
+}
+#copyright {
+    left: 15%;
+    bottom: 1%;
+    color: white;
+    -webkit-touch-callout: none;
+}
+#copyright p {
+    font-size: 2.75vw;
 }
