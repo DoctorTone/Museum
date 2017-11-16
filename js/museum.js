@@ -40,7 +40,6 @@ class MuseumApp extends BaseApp {
         let mtlLoader = new THREE.MTLLoader();
         mtlLoader.setPath("./models/");
         mtlLoader.load("Barbute.mtl", materials => {
-            $('#waiting').hide();
             materials.preload();
 
             let objLoader = new THREE.OBJLoader();
@@ -53,6 +52,7 @@ class MuseumApp extends BaseApp {
                 this.rotateObject.position.set(modelConfig.POS_X, modelConfig.POS_Y, modelConfig.POS_Z);
                 this.rotating = true;
                 this.createInfoPoints();
+                $('#waiting').hide();
             })
         });
     }
@@ -233,6 +233,14 @@ class MuseumApp extends BaseApp {
         $('#toggleRotation').prop("checked", true);
         $('#toggleWire').prop("checked", false);
     }
+
+    stopNotifications(elemList) {
+        for(let i=0, numElems=elemList.length; i<numElems; ++i) {
+            $('#' + elemList[i]).contextmenu(() => {
+                return false;
+            });
+        }
+    }
 }
 
 $(document).ready( ()=> {
@@ -299,6 +307,9 @@ $(document).ready( ()=> {
     });
 
     $('#noticeText').html("Click info icons!");
+
+    let elemList = ["title", "settings", "moveControls", "instructions", "info", "copyright"];
+    app.stopNotifications(elemList);
 
     $('#info').on("click", () => {
         $('#myModal').modal();
