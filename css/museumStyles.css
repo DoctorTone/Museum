@@ -147,6 +147,7 @@ body {
         font-size: 2.5vw;
     }
     #settings {
+        left: 0.5%;
         width: 20%;
     }
     #settings p {
