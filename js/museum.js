@@ -3,6 +3,7 @@
  */
 
 //App for interactive artefact display
+const MOBILE_WIDTH = 768;
 
 class MuseumApp extends BaseApp {
     constructor() {
@@ -234,6 +235,11 @@ class MuseumApp extends BaseApp {
 }
 
 $(document).ready( ()=> {
+
+    if(window.innerWidth < MOBILE_WIDTH) {
+        $('#mainModal').modal();
+    }
+
     //Init museum
     let container = document.getElementById("WebGL-output");
 
@@ -287,6 +293,10 @@ $(document).ready( ()=> {
     });
 
     $('#noticeText').html("Click info icons!");
+
+    $('#info').on("click", () => {
+        $('#myModal').modal();
+    });
 
     app.run();
 });

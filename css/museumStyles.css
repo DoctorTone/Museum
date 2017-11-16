@@ -21,9 +21,6 @@ body {
     border-radius: 10px;
     background: #636363;
 }
-.btn {
-    padding: 3% 0;
-}
 @font-face {
     font-family: 'maelregular';
     src: url('../fonts/mael-webfont.woff2') format('woff2'),
@@ -83,6 +80,7 @@ body {
 #moveControls button {
     width: 75%;
     margin-bottom: 3%;
+    padding: 3% 0;
 }
 #contributions {
     bottom: 2%;
