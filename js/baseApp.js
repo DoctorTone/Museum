@@ -30,7 +30,7 @@ class BaseApp {
         this.container = container;
         this.createRenderer();
         this.createCamera();
-        //this.createControls();
+        this.createControls();
         //this.stats = initStats();
         this.statsShowing = false;
         //$("#Stats-output").hide();
@@ -146,7 +146,7 @@ class BaseApp {
     }
 
     createCamera() {
-        const CAM_X = 0, CAM_Y = 0, CAM_Z = 0.52;
+        const CAM_X = 0, CAM_Y = -0.05, CAM_Z = 0.63;
         const NEAR_PLANE = 0.01, FAR_PLANE = 100;
         this.defaultCamPos = new THREE.Vector3(CAM_X, CAM_Y, CAM_Z);
         this.camera = new THREE.PerspectiveCamera(45, this.container.clientWidth / window.innerHeight, NEAR_PLANE, FAR_PLANE );
@@ -162,9 +162,16 @@ class BaseApp {
         this.controls.staticMoving = true;
         this.controls.dynamicDampingFactor = 0.3;
 
+        /*
+        this.controls.noRotate = true;
+        this.controls.noRoll = true;
+        this.controls.noPan = true;
+        this.controls.noZoom = true;
+        */
+
         this.controls.keys = [ 65, 83, 68 ];
 
-        const LOOK_X = 0, LOOK_Y = 0, LOOK_Z = 0;
+        const LOOK_X = 0, LOOK_Y = -0.05, LOOK_Z = 0;
         let lookAt = new THREE.Vector3(LOOK_X, LOOK_Y, LOOK_Z);
         this.controls.setLookAt(lookAt);
     }
@@ -176,7 +183,7 @@ class BaseApp {
 
     update() {
         //Do any updates
-        //this.controls.update();
+        this.controls.update();
     }
 
     run() {

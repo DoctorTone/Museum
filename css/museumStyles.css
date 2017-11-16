@@ -69,29 +69,35 @@ body {
     width: 15%;
 }
 #title {
-    left: 42.5%;
+    left: 25%;
     top: 2%;
-    width: 15%;
+    width: 50%;
     font-family: "maelregular";
-    font-size: 4vw;
+}
+#title p {
+    font-size: 8vw;
 }
 #settings {
-    top: 2%;
-    right: 1%;
-    width: 7.5%;
+    top: 5%;
+    right: 0.5%;
+    width: 22.5%;
+    padding: 0.5%;
 }
 #settings p {
     color: white;
-    font-size: 1.1vw;
+    font-size: 4vw;
+}
+.checkbox label {
+    font-size: 3vw;
 }
 #moveControls {
-    top: 20%;
+    bottom: 0.5%;
     right: 1%;
-    width: 7.5%;
+    width: 20%;
 }
 #moveControls p {
     color: white;
-    font-size: 1.1vw;
+    font-size: 3vw;
 }
 #moveControls img {
     width: 40%;
@@ -101,20 +107,16 @@ body {
     margin-bottom: 3%;
     padding: 3% 0;
 }
-#contributions {
-    bottom: 2%;
-    right: 1%;
-}
 #instructions {
-    bottom: 1%;
-    left: 40%;
-    width: 20%;
-    font-size: 1.5vw;
+    bottom: 10%;
+    left: 30%;
+    width: 40%;
+    font-size: 4vw;
 }
 #info {
     bottom: 1%;
     left: 1%;
-    width: 5%;
+    width: 12.5%;
 }
 #info img {
     width: 100%;
@@ -126,5 +128,5 @@ body {
     -webkit-touch-callout: none;
 }
 #copyright p {
-    font-size: 2.75vw;
+    font-size: 3vw;
 }
