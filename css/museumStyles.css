@@ -167,3 +167,21 @@ body {
         font-size: 2.5vw;
     }
 }
+@media (min-width: 568px) and (orientation: portrait) {
+    #title p {
+        font-size: 9vw;
+    }
+    #moveControls {
+        width: 20%;
+    }
+    #moveControls p {
+        font-size: 3vw;
+    }
+    #instructions {
+        width: 50%;
+        left: 25%;
+    }
+    #instructions p {
+        font-size: 4.5vw;
+    }
+}
