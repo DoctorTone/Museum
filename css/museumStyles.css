@@ -223,3 +223,40 @@ body {
         width: 10%;
     }
 }
+@media (min-width: 1200px) {
+    #moveControls {
+        width: 10%;
+    }
+    #moveControls p {
+        font-size: 1.75vw;
+    }
+}
+@media (min-width: 1680px) {
+    #settings {
+        width: 10%;
+    }
+    #settings p {
+        font-size: 2vw;
+    }
+    .checkbox label {
+        font-size: 1.5vw;
+    }
+    #moveControls {
+        width: 8%;
+    }
+    #moveControls p {
+        font-size: 1.25vw;
+    }
+    #instructions p {
+        font-size: 1.5vw;
+    }
+    #info {
+        width: 5%;
+    }
+    #copyright {
+        left: 10%;
+    }
+    #copyright p {
+        font-size: 1.5vw;
+    }
+}

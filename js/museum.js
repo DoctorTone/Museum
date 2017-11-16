@@ -52,7 +52,7 @@ class MuseumApp extends BaseApp {
                 this.rotateObject.position.set(modelConfig.POS_X, modelConfig.POS_Y, modelConfig.POS_Z);
                 this.rotating = true;
                 this.createInfoPoints();
-                //$('#waiting').hide();
+                $('#waiting').hide();
             })
         });
     }
