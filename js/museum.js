@@ -257,6 +257,11 @@ $(document).ready( ()=> {
     //Init museum
     let container = document.getElementById("WebGL-output");
 
+    let zoomOutElement = $('#zoomOut');
+    let zoomInElement = $('#zoomIn');
+    let rotUpElement = $('#rotUp');
+    let rotDownElement = $('#rotDown');
+
     let app = new MuseumApp();
     app.init(container);
     //app.createGUI();
@@ -270,35 +275,67 @@ $(document).ready( ()=> {
         app.toggleWireframe();
     });
 
-    $('#rotUp').on("mousedown", () => {
+    rotUpElement.on("mousedown", () => {
         app.rotateUp(true);
     });
 
-    $('#rotUp').on("mouseup", () => {
+    rotUpElement.on("mouseup", () => {
         app.rotateUp(false);
     });
 
-    $('#rotDown').on("mousedown", () => {
+    rotUpElement.on("touchstart", () => {
+        app.rotateUp(true);
+    });
+
+    rotUpElement.on("touchend", () => {
+        app.rotateUp(false);
+    });
+
+    rotDownElement.on("mousedown", () => {
         app.rotateDown(true);
     });
 
-    $('#rotDown').on("mouseup", () => {
+    rotDownElement.on("mouseup", () => {
+        app.rotateDown(false);
+    });
+    
+    rotDownElement.on("touchstart", () => {
+        app.rotateDown(true);
+    });
+
+    rotDownElement.on("touchend", () => {
         app.rotateDown(false);
     });
 
-    $('#zoomIn').on("mousedown", () => {
+    zoomInElement.on("mousedown", () => {
         app.zoomIn(true);
     });
 
-    $('#zoomIn').on("mouseup", () => {
+    zoomInElement.on("mouseup", () => {
         app.zoomIn(false);
     });
 
-    $('#zoomOut').on("mousedown", () => {
+    zoomInElement.on("touchstart", () => {
+        app.zoomIn(true);
+    });
+
+    zoomInElement.on("touchend", () => {
+        app.zoomIn(false);
+    });
+
+    zoomOutElement.on("mousedown", () => {
         app.zoomOut(true);
     });
 
-    $('#zoomOut').on("mouseup", () => {
+    zoomOutElement.on("mouseup", () => {
+        app.zoomOut(false);
+    });
+
+    zoomOutElement.on("touchstart", () => {
+        app.zoomOut(true);
+    });
+
+    zoomOutElement.on("touchend", () => {
         app.zoomOut(false);
     });
 
