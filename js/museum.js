@@ -298,7 +298,7 @@ $(document).ready( ()=> {
     rotDownElement.on("mouseup", () => {
         app.rotateDown(false);
     });
-    
+
     rotDownElement.on("touchstart", () => {
         app.rotateDown(true);
     });

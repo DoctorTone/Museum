@@ -135,3 +135,34 @@ body {
 #copyright p {
     font-size: 3vw;
 }
+/* Media queries */
+@media (min-width: 568px) {
+    #title p {
+        font-size: 6vw;
+    }
+    #moveControls {
+        width: 15%;
+    }
+    #moveControls p {
+        font-size: 2.5vw;
+    }
+    #settings {
+        width: 20%;
+    }
+    #settings p {
+        font-size: 3vw;
+    }
+    #instructions {
+        width: 30%;
+        left: 35%;
+    }
+    #instructions p {
+        font-size: 3.75vw;
+    }
+    #info {
+        width: 10%;
+    }
+    #copyright p {
+        font-size: 2.5vw;
+    }
+}
