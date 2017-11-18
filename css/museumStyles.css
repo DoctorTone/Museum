@@ -138,6 +138,9 @@ body {
 }
 /* Media queries */
 @media (min-width: 568px) {
+    #title {
+        width: 30%;
+    }
     #title p {
         font-size: 6vw;
     }
