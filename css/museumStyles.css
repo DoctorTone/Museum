@@ -172,6 +172,9 @@ body {
     }
 }
 @media (min-width: 568px) and (orientation: portrait) {
+    #title {
+        width: 40%;
+    }
     #title p {
         font-size: 9vw;
     }
