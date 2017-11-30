@@ -164,7 +164,7 @@ body {
         font-size: 3.75vw;
     }
     #info {
-        width: 10%;
+        width: 7%;
     }
     #copyright p {
         font-size: 2.5vw;
@@ -214,6 +214,9 @@ body {
     #notSupported p img {
         width: 25%;
     }
+    #info {
+        width: 10%;
+    }
 }
 @media (min-width: 768px) {
     #settings {
@@ -228,9 +231,6 @@ body {
     #instructions p {
         font-size: 2.5vw;
     }
-    #info {
-        width: 7.5%;
-    }
     #waiting img {
         width: 7.5%;
     }
@@ -244,9 +244,6 @@ body {
     }
     #instructions p {
         font-size: 3vw;
-    }
-    #info {
-        width: 10%;
     }
     #notSupported {
         top: 35%;
@@ -276,6 +273,9 @@ body {
     #notSupported p img {
         width: 20%;
     }
+    #info {
+        width: 5%;
+    }
 }
 @media (min-width: 1680px) {
     #settings {
@@ -297,7 +297,7 @@ body {
         font-size: 1.5vw;
     }
     #info {
-        width: 5%;
+        width: 4.5%;
     }
     #copyright {
         left: 10%;
