@@ -38,6 +38,9 @@ body {
 .infoPanelClear {
     position: absolute;
 }
+.toolPanel {
+    position: absolute;
+}
 #notSupported {
     top: 40%;
     left: 12.5%;
@@ -80,14 +83,13 @@ body {
 }
 #settings {
     top: 2.5%;
-    left: 0.5%;
-    width: 22.5%;
+    left: 1.5%;
+    width: 12.5%;
     padding: 0.5%;
     -webkit-touch-callout: none;
 }
-#settings p {
-    color: white;
-    font-size: 4vw;
+#settings img {
+    width: 100%;
 }
 .checkbox label {
     font-size: 3vw;
@@ -148,11 +150,8 @@ body {
         font-size: 2.5vw;
     }
     #settings {
-        left: 0.5%;
+        left: 2.5%;
         width: 20%;
-    }
-    #settings p {
-        font-size: 3vw;
     }
     #instructions {
         width: 30%;
@@ -223,10 +222,7 @@ body {
 }
 @media (min-width: 768px) {
     #settings {
-        width: 15%;
-    }
-    #settings p {
-        font-size: 3vw;
+        width: 25%;
     }
     .checkbox label {
         font-size: 2vw;
@@ -294,10 +290,10 @@ body {
 }
 @media (min-width: 1680px) {
     #settings {
-        width: 10%;
+        width: 15%;
     }
-    #settings p {
-        font-size: 2vw;
+    .custom-switch .custom-control-label::before {
+        width: 2rem;
     }
     .checkbox label {
         font-size: 1.5vw;
