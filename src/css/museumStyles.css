@@ -1,0 +1,327 @@
+/* Museum styles */
+
+body {
+    /* set margin to 0 and overflow to hidden, to go fullscreen */
+    margin: 0;
+    overflow: hidden;
+}
+
+.noDisplay {
+    display: none;
+}
+.centred {
+    text-align: center;
+}
+.plainPanel {
+    position: absolute;
+    color: orange;
+    padding: 0.5% 0.5% 0.25% 0.5%;
+}
+.notice {
+    border-radius: 10px;
+    background: #636363;
+}
+@font-face {
+    font-family: 'maelregular';
+    src: url('../fonts/mael-webfont.woff2') format('woff2'),
+    url('../fonts/mael-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.infoPanel {
+    position: absolute;
+    background: gray;
+    border-radius: 15px;
+    border: 2px solid black;
+    padding: 1%;
+}
+.infoPanelClear {
+    position: absolute;
+}
+#notSupported {
+    top: 40%;
+    left: 12.5%;
+    width: 75%;
+    background-color: #3e3e3e;
+    color: white;
+    font-size: 2.5vw;
+    border-radius: 15px;
+    padding: 1%;
+}
+#notSupported p img {
+    width: 25%;
+}
+#waiting {
+    top: 20%;
+    width: 40%;
+    left: 30%;
+    background-color: #c7c7c7;
+    color: black;
+    border-radius: 15px;
+    padding: 1%;
+    border: 2px solid black;
+}
+#waiting p {
+    font-size: 2.5vw;
+}
+#waiting img {
+    width: 15%;
+}
+#title {
+    right: 2.5%;
+    top: 2%;
+    width: 50%;
+    font-family: "maelregular";
+    -webkit-touch-callout: none;
+}
+#title p {
+    font-size: 9vw;
+    margin: 0;
+}
+#settings {
+    top: 2.5%;
+    left: 0.5%;
+    width: 22.5%;
+    padding: 0.5%;
+    -webkit-touch-callout: none;
+}
+#settings p {
+    color: white;
+    font-size: 4vw;
+}
+.checkbox label {
+    font-size: 3vw;
+}
+#moveControls {
+    bottom: 0.5%;
+    right: 1%;
+    width: 25%;
+    -webkit-touch-callout: none;
+}
+#moveControls p {
+    color: white;
+    font-size: 3.5vw;
+}
+#moveControls img {
+    width: 40%;
+}
+#moveControls button {
+    width: 75%;
+    margin-bottom: 3%;
+    padding: 3% 0;
+}
+#instructions {
+    bottom: 10%;
+    left: 30%;
+    width: 40%;
+    font-size: 4vw;
+    -webkit-touch-callout: none;
+}
+#info {
+    bottom: 1%;
+    left: 1%;
+    width: 12.5%;
+    -webkit-touch-callout: none;
+}
+#info img {
+    width: 100%;
+}
+#copyright {
+    left: 15%;
+    bottom: 1.5%;
+    font-size: 3.5vw;
+    color: white;
+    -webkit-touch-callout: none;
+}
+/* Media queries */
+@media (min-width: 568px) {
+    #title {
+        width: 30%;
+    }
+    #title p {
+        font-size: 6vw;
+    }
+    #moveControls {
+        width: 15%;
+    }
+    #moveControls p {
+        font-size: 2.5vw;
+    }
+    #settings {
+        left: 0.5%;
+        width: 20%;
+    }
+    #settings p {
+        font-size: 3vw;
+    }
+    #instructions {
+        width: 30%;
+        left: 35%;
+    }
+    #instructions p {
+        font-size: 3.75vw;
+    }
+    #info {
+        width: 7%;
+    }
+    #copyright {
+        font-size: 2.25vw;
+        left: 11%;
+    }
+    #waiting img {
+        width: 7.5%;
+    }
+    #notSupported {
+        top: 35%;
+        font-size: 2.25vw;
+    }
+    #notSupported p img {
+        width: 20%;
+    }
+}
+@media (min-width: 568px) and (orientation: portrait) {
+    #title {
+        width: 40%;
+    }
+    #title p {
+        font-size: 9vw;
+    }
+    #moveControls {
+        width: 20%;
+    }
+    #moveControls p {
+        font-size: 3vw;
+    }
+    #instructions {
+        width: 50%;
+        left: 25%;
+    }
+    #instructions p {
+        font-size: 4.5vw;
+    }
+    #waiting {
+        width: 75%;
+        left: 12.5%;
+    }
+    #waiting p {
+        font-size: 3.5vw;
+    }
+    #notSupported {
+        top: 35%;
+        font-size: 2.5vw;
+    }
+    #notSupported p img {
+        width: 25%;
+    }
+    #info {
+        width: 10%;
+    }
+    #copyright {
+        font-size: 2.75vw;
+        left: 12.5%;
+    }
+}
+@media (min-width: 768px) {
+    #settings {
+        width: 15%;
+    }
+    #settings p {
+        font-size: 3vw;
+    }
+    .checkbox label {
+        font-size: 2vw;
+    }
+    #instructions p {
+        font-size: 2.5vw;
+    }
+    #waiting img {
+        width: 7.5%;
+    }
+    #copyright {
+        font-size: 2vw;
+        left: 10%;
+    }
+}
+@media (min-width: 768px) and (orientation: portrait) {
+    #settings {
+        width: 20%;
+    }
+    .checkbox label {
+        font-size: 2.75vw;
+    }
+    #instructions p {
+        font-size: 3vw;
+    }
+    #notSupported {
+        top: 35%;
+        font-size: 2.75vw;
+    }
+    #notSupported p img {
+        width: 30%;
+    }
+    #copyright {
+        font-size: 2.5vw;
+        left: 12%;
+    }
+}
+@media (min-width: 1200px) {
+    #moveControls {
+        width: 10%;
+    }
+    #moveControls p {
+        font-size: 1.75vw;
+    }
+    #waiting p {
+        font-size: 2vw;
+    }
+    #waiting img {
+        width: 5%;
+    }
+    #notSupported {
+        top: 30%;
+        font-size: 2.25vw;
+    }
+    #notSupported p img {
+        width: 20%;
+    }
+    #info {
+        width: 5%;
+    }
+    #copyright {
+        left: 7.5%;
+        font-size: 1.5vw;
+    }
+}
+@media (min-width: 1680px) {
+    #settings {
+        width: 10%;
+    }
+    #settings p {
+        font-size: 2vw;
+    }
+    .checkbox label {
+        font-size: 1.5vw;
+    }
+    #moveControls {
+        width: 8%;
+    }
+    #moveControls p {
+        font-size: 1.25vw;
+    }
+    #instructions p {
+        font-size: 1.5vw;
+    }
+    #info {
+        width: 4.5%;
+    }
+    #copyright {
+        font-size: 1.25vw;
+    }
+    #notSupported {
+        top: 30%;
+        font-size: 1.75vw;
+    }
+    #notSupported p img {
+        width: 12.5%;
+    }
+}
